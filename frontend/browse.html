@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QuickRent - Browse Property</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <nav>
+        <h1>QuickRent</h1>
+        <div class="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="browse.html">Browse Property</a>
+            <a href="list.html">List Property</a>
+            <a href="about.html">About</a>
+            <div class="auth-btn">
+                <button onclick="goToLoginPage('login')" class="primary-btn login">Login</button>
+                <button onclick="goToLoginPage('signup')" class="primary-btn signUp">Sign Up</button>
+            </div>
+            <div class="user-menu" style="display: none;">
+                <div class="dropdown">
+                    <button class="dropdown-btn">
+                        <i class="fas fa-user"></i> <span id="username"></span>
+                    </button>
+                    <div class="dropdown-content">
+                        <a href="profile.html" id="profile-link">Profile</a>
+                        <a href="notifications.html" id="notifications-link" style="display: none;">Notifications</a>
+                        <a href="admin.html" id="admin-link" style="display: none;">Admin Panel</a>
+                        <a href="#" onclick="logout()">Logout</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <section>
+        <!-- Browse Properties Page -->
+        <div id="browse-page" class="page">
+            <div class="container">
+                <h2>Browse Properties</h2>
+                <div class="filters-container">
+                    <div class="filters-row">
+                        <div class="filter-group">
+                            <label>Location</label>
+                            <select id="location-filter" onchange="filterProperties()">
+                                <option value="">All Locations</option>
+                                <option value="bandra">Bandra</option>
+                                <option value="juhu">Juhu</option>
+                                <option value="andheri">Andheri</option>
+                                <option value="vile-parle">Vile Parle</option>
+                                <option value="kandivali">Kandivali</option>
+                                <option value="borivali">Borivali</option>
+                                <option value="malad">Malad</option>
+                                <option value="santacruz">Santacruz</option>
+                                <option value="sewri">Sewri</option>
+                                <option value="thane">Thane</option>
+                                <option value="navi-mumbai">Navi Mumbai</option>
+                                <option value="pune">Pune</option>
+                            </select>
+                        </div>
+                        <div class="filter-group">
+                            <label>Property Type</label>
+                            <select id="type-filter" onchange="filterProperties()">
+                                <option value="">All Types</option>
+                                <option value="apartment">Apartment</option>
+                                <option value="house">House</option>
+                                <option value="room">Single Room</option>
+                                <option value="studio">Studio</option>
+                                <option value="condo">Condo</option>
+                            </select>
+                        </div>
+                        <div class="filter-group">
+                            <label>Price Range</label>
+                            <select id="price-filter" onchange="filterProperties()">
+                                <option value="">All Prices</option>
+                                <option value="0-15000">₹0 - ₹15,000</option>
+                                <option value="15000-30000">₹15,000 - ₹30,000</option>
+                                <option value="30000-50000">₹30,000 - ₹50,000</option>
+                                <option value="50000+">₹50,000+</option>
+                            </select>
+                        </div>
+                        <div class="filter-group">
+                            <label>Bedrooms</label>
+                            <select id="bedroom-filter" onchange="filterProperties()">
+                                <option value="">Any</option>
+                                <option value="1">1+ Bed</option>
+                                <option value="2">2+ Beds</option>
+                                <option value="3">3+ Beds</option>
+                                <option value="4">4+ Beds</option>
+                            </select>
+                        </div>
+                        <div class="filter-group">
+                            <label>Roommate Required</label>
+                            <select id="roommate-filter" onchange="filterProperties()">
+                                <option value="">Any</option>
+                                <option value="true">Yes</option>
+                                <option value="false">No</option>
+                            </select>
+                        </div>
+                        <div class="filter-group">
+                            <label>Sort By</label>
+                            <select id="sort-filter" onchange="filterProperties()">
+                                <option value="newest">Newest First</option>
+                                <option value="price-low">Price: Low to High</option>
+                                <option value="price-high">Price: High to Low</option>
+                                <option value="bedrooms">Most Bedrooms</option>
+                            </select>
+                        </div>
+                        <button class="btn-secondary filter-reset" onclick="resetFilters()">
+                            <i class="fas fa-rotate-right"></i> Reset
+                        </button>
+                    </div>
+                    <div class="amenity-filters">
+                        <label class="amenity-label">Amenities:</label>
+                        <div class="amenity-checkboxes">
+                            <label class="amenity-checkbox">
+                                <input type="checkbox" value="wifi" onchange="filterProperties()"> WiFi
+                            </label>
+                            <label class="amenity-checkbox">
+                                <input type="checkbox" value="parking" onchange="filterProperties()"> Parking
+                            </label>
+                            <label class="amenity-checkbox">
+                                <input type="checkbox" value="laundry" onchange="filterProperties()"> Laundry
+                            </label>
+                            <label class="amenity-checkbox">
+                                <input type="checkbox" value="gym" onchange="filterProperties()"> Gym
+                            </label>
+                            <label class="amenity-checkbox">
+                                <input type="checkbox" value="pool" onchange="filterProperties()"> Pool
+                            </label>
+                            <label class="amenity-checkbox">
+                                <input type="checkbox" value="ac" onchange="filterProperties()"> A/C
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="browse-header">
+                    <div class="results-info">
+                        <span id="results-count">0 properties found</span>
+                    </div>
+                    <div class="view-options">
+                        <button class="view-btn active" onclick="setView('grid')" data-view="grid">
+                            <i class="fas fa-th-large"></i>
+                        </button>
+                        <button class="view-btn" onclick="setView('list')" data-view="list">
+                            <i class="fas fa-list"></i>
+                        </button>
+                        <button class="view-btn" onclick="setView('map')" data-view="map">
+                            <i class="fas fa-map"></i> Map
+                        </button>
+                        <button class="btn-secondary" onclick="showBudgetRooms()">
+                            <i class="fas fa-coins"></i> Budget Rooms
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Budget Rooms Section -->
+                <div id="budget-rooms-section" class="budget-section" style="display: none;">
+                    <h3 style="padding: 2rem 0;"><i class="fas fa-coins"></i> Budget-Friendly Options (Under ₹15000/month)</h3>
+                    <div class="properties-grid" id="budget-properties-list">
+                        <!-- Budget properties will be loaded here -->
+                    </div>
+                </div>
+
+                <!-- Map View Section -->
+                <div id="map-view-section" class="map-section" style="display: none;">
+                    <div class="map-container">
+                        <div id="property-map"
+                            style="height: 500px; border-radius: 12px; border: 2px solid var(--border-color); position: relative;">
+                            <!-- Real map will be loaded here -->
+                        </div>
+                        <div id="map-properties-list" style="margin-top: 20px;">
+                            <!-- Map properties will be loaded here -->
+                        </div>
+                    </div>
+                </div>
+
+                <div class="comparison-bar" id="comparison-bar" style="display: none;">
+                    <div class="comparison-content">
+                        <span id="comparison-count">0 properties selected</span>
+                        <button class="btn-primary" onclick="showComparison()">Compare Properties</button>
+                        <button class="btn-secondary" onclick="clearComparison()">Clear All</button>
+                    </div>
+                </div>
+
+                <div class="properties-container">
+                    <div class="properties-grid" id="browse-properties-list">
+                        <!-- Properties will be loaded here -->
+                    </div>
+                </div>
+                
+                <!-- Compare Modal -->
+                <div id="compare-modal" class="modal" style="display:none;">
+                    <div class="modal-content compare-content">
+                        <span class="close" onclick="closeCompareModal()">&times;</span>
+                        <h3>Compare Properties</h3>
+                        <div id="compare-table-wrapper" style="overflow:auto;">
+                            <table id="compare-table" style="width:100%; border-collapse:collapse;"></table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div id="booking-modal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <span class="close" onclick="closeBookingModal()">&times;</span>
+            <h3>Book Property</h3>
+            <form id="booking-form">
+                <label>Start Date:</label>
+                <input type="date" id="start-date" required>
+
+                <label>End Date:</label>
+                <input type="date" id="end-date" required>
+
+                <label>Message to Owner:</label>
+                <textarea id="message" placeholder="Optional message"></textarea>
+
+                <button type="submit" class="btn-primary">Book</button>
+            </form>
+        </div>
+    </div>
+
+    <footer class="site-footer">
+        <div class="footer-container">
+            <div class="footer-brand">
+                <h3>QuickRent</h3>
+                <p>Find verified homes for students and professionals with ease.</p>
+            </div>
+            <div class="footer-links">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="browse.html">Browse</a></li>
+                    <li><a href="#" onclick="showPage('signup')">Sign Up</a></li>
+                    <li><a href="#" onclick="showPage('login')">Login</a></li>
+                </ul>
+            </div>
+            <div class="footer-contact">
+                <h4>Contact</h4>
+                <ul>
+                    <li><i class="fas fa-envelope"></i> support@quickrent.com</li>
+                    <li><i class="fas fa-phone"></i> +91 98765 43210</li>
+                    <li><i class="fas fa-map-marker-alt"></i> Mumbai, India</li>
+                </ul>
+            </div>
+            <div class="footer-social">
+                <h4>Follow Us</h4>
+                <div class="social-icons">
+                    <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <span>© <span id="year">2025</span> QuickRent. All rights reserved.</span>
+        </div>
+    </footer>
+    <script src="script.js"></script>
+</body>
+
+</html>

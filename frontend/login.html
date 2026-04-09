@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QuickRent - Browse Property</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <nav>
+        <h1>QuickRent</h1>
+        <div class="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="browse.html">Browse Property</a>
+            <a href="list.html">List Property</a>
+            <a href="about.html">About</a>
+            <div class="auth-btn">
+                <button onclick="goToLoginPage('login')" class="primary-btn login">Login</button>
+                <button onclick="goToLoginPage('signup')" class="primary-btn signUp">Sign Up</button>
+            </div>
+        </div>
+    </nav>
+
+    <section>
+        <div id="auth-page" class="page">
+            <div class="auth-container">
+                <div class="auth-toggle">
+                    <button id="toggle-login" class="tab-btn active" onclick="toggleAuth('login')">Login</button>
+                    <button id="toggle-signup" class="tab-btn" onclick="toggleAuth('signup')">Sign Up</button>
+                </div>
+
+                <!-- Login Form -->
+                <div id="login-form-container" class="auth-form">
+                    <h2>Login to QuickRent</h2>
+                    <form id="login-form">
+                        <div class="form-group">
+                            <label for="login-email">Email</label>
+                            <input type="email" id="login-email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="login-password">Password</label>
+                            <input type="password" id="login-password" required>
+                        </div>
+                        <button type="submit" class="btn-primary login-btn">Login</button>
+                    </form>
+                </div>
+
+                <!-- Signup Form -->
+                <div id="signup-form-container" class="auth-form" style="display: none;">
+                    <h2>Sign Up for QuickRent</h2>
+                    <form id="signup-form">
+                        <div class="form-group">
+                            <label for="signup-name">Full Name</label>
+                            <input type="text" id="signup-name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="signup-email">Email</label>
+                            <input type="email" id="signup-email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="signup-password">Password</label>
+                            <input type="password" id="signup-password" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="signup-phone">Phone Number</label>
+                            <input type="tel" id="signup-phone" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="signup-role">Role</label>
+                            <select id="signup-role" onchange="handleRoleChange()" required>
+                                <option value="tenant">Tenant/User</option>
+                                <option value="owner">Property Owner</option>
+                            </select>
+                        </div>
+                        <div class="form-group owner-fields" style="display: none;">
+                            <label for="signup-company">Company/Organization</label>
+                            <input type="text" id="signup-company">
+                        </div>
+                        <button type="submit" class="btn-primary login-btn">Sign Up</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="site-footer">
+        <div class="footer-container">
+            <div class="footer-brand">
+                <h3>QuickRent</h3>
+                <p>Find verified homes for students and professionals with ease.</p>
+            </div>
+            <div class="footer-links">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="browse.html">Browse</a></li>
+                    <li><a href="#" onclick="showPage('signup')">Sign Up</a></li>
+                    <li><a href="#" onclick="showPage('login')">Login</a></li>
+                </ul>
+            </div>
+            <div class="footer-contact">
+                <h4>Contact</h4>
+                <ul>
+                    <li><i class="fas fa-envelope"></i> support@quickrent.com</li>
+                    <li><i class="fas fa-phone"></i> +91 98765 43210</li>
+                    <li><i class="fas fa-map-marker-alt"></i> Mumbai, India</li>
+                </ul>
+            </div>
+            <div class="footer-social">
+                <h4>Follow Us</h4>
+                <div class="social-icons">
+                    <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <span>© <span id="year">2025</span> QuickRent. All rights reserved.</span>
+        </div>
+    </footer>
+    <script src="script.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QuickRent</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <nav>
+        <h1>QuickRent</h1>
+        <div class="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="browse.html">Browse Property</a>
+            <a href="list.html">List Property</a>
+            <a href="about.html">About</a>
+            <div class="auth-btn">
+                <button onclick="goToLoginPage('login')" class="primary-btn login">Login</button>
+                <button onclick="goToLoginPage('signup')" class="primary-btn signUp">Sign Up</button>
+            </div>
+            <div class="user-menu" style="display: none;">
+                <div class="dropdown">
+                    <button class="dropdown-btn">
+                        <i class="fas fa-user"></i> <span id="username"></span>
+                        <span id="notif-badge" class="notif-badge" style="display:none;">0</span>
+                    </button>
+                    <div class="dropdown-content">
+                        <a href="profile.html" id="profile-link">Profile</a>
+                            <a href="notifications.html" id="notifications-link" style="display: none;">Notifications</a>
+                        <a href="admin.html" id="admin-link" style="display: none;">Admin Panel</a>
+                        <a href="#" onclick="logout()">Logout</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </nav>
+
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>Find Your Perfect <span class="highlight">Rental Home</span> </h1>
+            <p>Discover amazing properties in prime locations with flexible rental terms and transparent pricing.</p>
+            <form id="search-form" class="search-bar">
+                <input type="text" placeholder="Search by location, property type, or amenities..." id="search-input">
+                <button type="submit" class="primary-btn search">
+                    <i class="fas fa-search"></i> Search
+                </button>
+            </form>
+        </div>
+        <div class="hero-stats">
+            <div class="stat-items">
+                <h3>10+</h3>
+                <p>Properties Listed</p>
+            </div>
+            <div class="stat-items">
+                <h3>10+</h3>
+                <p>Happy Tenants</p>
+            </div>
+            <div class="stat-items">
+                <h3>10+</h3>
+                <p>Cities Covered</p>
+            </div>
+        </div>
+    </section>
+
+    <div class="features">
+        <div class="container">
+            <h2>Why Choose QuickRent?</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <i class="fas fa-home"></i>
+                    <h3>Quality Properties</h3>
+                    <p>Verified listings from trusted owners</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-shield-alt"></i>
+                    <h3>Secure Platform</h3>
+                    <p>Safe and secure rental process</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-users"></i>
+                    <h3>Community Focused</h3>
+                    <p>Built specifically for students and professionals</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-dollar-sign"></i>
+                    <h3>Affordable Options</h3>
+                    <p>Competitive pricing for every budget</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-clock"></i>
+                    <h3>Quick Process</h3>
+                    <p>Fast approval and move-in process</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-headset"></i>
+                    <h3>24/7 Support</h3>
+                    <p>Round-the-clock customer assistance</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="how-it-works">
+        <div class="container">
+            <h2>How QuickRent Works</h2>
+            <div class="steps-grid">
+                <div class="step-card">
+                    <div class="step-number">1</div>
+                    <h3>Search & Browse</h3>
+                    <p>Use our filters to find properties that match your needs and budget</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">2</div>
+                    <h3>Contact Owner</h3>
+                    <p>Connect directly with property owners to schedule viewings</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">3</div>
+                    <h3>Book & Move In</h3>
+                    <p>Complete the booking process and get ready to move into your new home</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="testimonials">
+        <div class="container">
+            <h2>What Our Users Say</h2>
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <p>"QuickRent made finding my student accommodation so easy! The whole process was smooth
+                            and the support team was incredibly helpful."</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="author-info">
+                            <h4>Sarah Johnson</h4>
+                            <span>Computer Science Student</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <p>"As a working professional new to the city, QuickRent helped me find the perfect
+                            apartment close to my office. Highly recommended!"</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="author-info">
+                            <h4>Michael Chen</h4>
+                            <span>Software Engineer</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <p>"Listing my properties on QuickRent has been a game-changer. I've found reliable tenants
+                            quickly and the platform is very user-friendly."</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="author-info">
+                            <h4>David Rodriguez</h4>
+                            <span>Property Owner</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="cta-section">
+        <div class="container">
+            <div class="cta-content">
+                <h2>Ready to Find Your Perfect Home?</h2>
+                <p>Join thousands of students and professionals who have found their ideal rental through QuickRent
+                </p>
+                <div class="cta-buttons">
+                    <button class="btn-prim" onclick="window.location.href='browse.html'">
+                        <i class="fas fa-search"></i> Browse Properties
+                    </button>
+                    <button id="get-started-btn" class="btn-secondary" onclick="goToLoginPage('signup')">
+                        <i class="fas fa-user-plus"></i> Get Started
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+    <footer class="site-footer">
+        <div class="footer-container">
+            <div class="footer-brand">
+                <h3>QuickRent</h3>
+                <p>Find verified homes for students and professionals with ease.</p>
+            </div>
+            <div class="footer-links">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="browse.html">Browse</a></li>
+                    <li><a href="about.html">About</a></li>
+                </ul>
+            </div>
+            <div class="footer-contact">
+                <h4>Contact</h4>
+                <ul>
+                    <li><i class="fas fa-envelope"></i> support@quickrent.com</li>
+                    <li><i class="fas fa-phone"></i> +91 98765 43210</li>
+                    <li><i class="fas fa-map-marker-alt"></i> Mumbai, India</li>
+                </ul>
+            </div>
+            <div class="footer-social">
+                <h4>Follow Us</h4>
+                <div class="social-icons">
+                    <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <span>© <span id="year">2025</span> QuickRent. All rights reserved.</span>
+        </div>
+    </footer>
+    <script src="script.js"></script>
+</body>
+</html>

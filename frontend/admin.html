@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QuickRent</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <nav>
+        <h1>QuickRent</h1>
+        <div class="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="browse.html">Browse Property</a>
+            <a href="list.html">List Property</a>
+            <a href="about.html">About</a>
+            <div class="auth-btn">
+                <button onclick="goToLoginPage('login')" class="primary-btn login">Login</button>
+                <button onclick="goToLoginPage('signup')" class="primary-btn signUp">Sign Up</button>
+            </div>
+            <div class="user-menu" style="display: none;">
+                <div class="dropdown">
+                    <button class="dropdown-btn">
+                        <i class="fas fa-user"></i> <span id="username"></span>
+                    </button>
+                    <div class="dropdown-content">
+                        <a href="profile.html" id="profile-link">Profile</a>
+                        <a href="admin.html" id="admin-link" style="display: none;">Admin Panel</a>
+                        <a href="#" onclick="logout()">Logout</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </nav>
+
+    <section>
+        <h1>Admin Dashboard</h1>
+
+        <!-- Users Management -->
+        <div class="section" id="users-section">
+            <h2>Manage Users</h2>
+            <table id="users-table">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Role</th>
+                        <th>Company</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+
+        <!-- Properties Management -->
+        <div class="section" id="properties-section">
+            <h2>Manage Properties</h2>
+            <div class="property-filters">
+                <button class="filter-btn active" onclick="filterProperties('all')">All</button>
+                <button class="filter-btn" onclick="filterProperties('pending')">Pending</button>
+                <button class="filter-btn" onclick="filterProperties('approved')">Approved</button>
+                <button class="filter-btn" onclick="filterProperties('rejected')">Rejected</button>
+            </div>
+            <table id="properties-table">
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Owner</th>
+                        <th>Location</th>
+                        <th>Price</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </section>
+
+    <footer class="site-footer">
+        <div class="footer-container">
+            <div class="footer-brand">
+                <h3>QuickRent</h3>
+                <p>Find verified homes for students and professionals with ease.</p>
+            </div>
+            <div class="footer-links">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="browse.html">Browse</a></li>
+                    <li><a href="about.html">About</a></li>
+                </ul>
+            </div>
+            <div class="footer-contact">
+                <h4>Contact</h4>
+                <ul>
+                    <li><i class="fas fa-envelope"></i> support@quickrent.com</li>
+                    <li><i class="fas fa-phone"></i> +91 98765 43210</li>
+                    <li><i class="fas fa-map-marker-alt"></i> Mumbai, India</li>
+                </ul>
+            </div>
+            <div class="footer-social">
+                <h4>Follow Us</h4>
+                <div class="social-icons">
+                    <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <span>© <span id="year">2025</span> QuickRent. All rights reserved.</span>
+        </div>
+    </footer>
+    <script src="script.js"></script>
+</body>
+
+</html>

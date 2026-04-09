@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QuickRent - Browse Property</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <nav>
+        <h1>QuickRent</h1>
+        <div class="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="browse.html">Browse Property</a>
+            <a href="list.html">List Property</a>
+            <a href="about.html">About</a>
+            <div class="auth-btn">
+                <button onclick="goToLoginPage('login')" class="primary-btn login">Login</button>
+                <button onclick="goToLoginPage('signup')" class="primary-btn signUp">Sign Up</button>
+            </div>
+            <div class="user-menu" style="display: none;">
+                <div class="dropdown">
+                    <button class="dropdown-btn">
+                        <i class="fas fa-user"></i> <span id="username"></span>
+                    </button>
+                    <div class="dropdown-content">
+                        <a href="profile.html" id="profile-link">Profile</a>
+                        <a href="notifications.html" id="notifications-link" style="display: none;">Notifications</a>
+                        <a href="admin.html" id="admin-link" style="display: none;">Admin Panel</a>
+                        <a href="#" onclick="logout()">Logout</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <section>
+        <!-- List Property Page -->
+        <div id="list-property-page" class="page">
+            <div class="container">
+                <h2>List Your Property</h2>
+                <div class="property-form">
+                    <form id="list-property-form">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="property-title">Property Title</label>
+                                <input type="text" id="property-title" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="property-type">Property Type</label>
+                                <select id="property-type" required>
+                                    <option value="">Select Type</option>
+                                    <option value="apartment">Apartment</option>
+                                    <option value="house">House</option>
+                                    <option value="room">Single Room</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="property-location">General Location/Area</label>
+                                <input type="text" id="property-location" placeholder="e.g., Downtown, Campus Area"
+                                    required>
+                            </div>
+                            <div class="form-group">
+                                <label for="property-price">Monthly Rent (₹)</label>
+                                <input type="number" id="property-price" required>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="property-address">Exact Address</label>
+                                <input type="text" id="property-address"
+                                    placeholder="Street address, building name, etc." required>
+                            </div>
+                            <div class="form-group">
+                                <label for="property-coordinates">GPS Coordinates (Optional)</label>
+                                <input type="text" id="property-coordinates" placeholder="Latitude, Longitude">
+                                <small style="color: var(--text-light); display: block; margin-top: 5px;">
+                                    <button type="button" onclick="getCurrentLocation()"
+                                        class="btn-secondary btn-small">
+                                        <i class="fas fa-map-marker-alt"></i> Get Current Location
+                                    </button>
+                                </small>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="property-nearby">Nearby Landmarks</label>
+                                <input type="text" id="property-nearby"
+                                    placeholder="e.g., Near Metro Station, Close to University">
+                            </div>
+                            <div class="form-group">
+                                <label for="property-transport">Transportation Access</label>
+                                <select id="property-transport">
+                                    <option value="">Select proximity to transport</option>
+                                    <option value="walking">Walking distance (&lt; 5 min)</option>
+                                    <option value="short">Short distance (5-10 min)</option>
+                                    <option value="moderate">Moderate distance (10-20 min)</option>
+                                    <option value="far">Far (> 20 min)</option>
+                                </select>
+                            </div>
+                        </div>
+
+
+
+
+                        <!-- Property Features -->
+                        <h4 style="margin: 30px 0 15px 0; color: var(--primary-color);">Additional Property Features
+                        </h4>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="property-age">Property Age (years)</label>
+                                <input type="number" id="property-age" placeholder="e.g., 5">
+                            </div>
+                            <div class="form-group">
+                                <label for="property-floor">Floor Number</label>
+                                <input type="number" id="property-floor" placeholder="e.g., 3">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="property-facing">Property Facing</label>
+                                <select id="property-facing">
+                                    <option value="">Select direction</option>
+                                    <option value="north">North</option>
+                                    <option value="south">South</option>
+                                    <option value="east">East</option>
+                                    <option value="west">West</option>
+                                    <option value="northeast">North-East</option>
+                                    <option value="northwest">North-West</option>
+                                    <option value="southeast">South-East</option>
+                                    <option value="southwest">South-West</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="total-floors">Total Floors in Building</label>
+                                <input type="number" id="total-floors" placeholder="e.g., 10">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="roommate-required">Roommate Required</label>
+                                <select id="roommate-required">
+                                    <option value="false">No</option>
+                                    <option value="true">Yes</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="property-bedrooms">Bedrooms</label>
+                                <input type="number" id="property-bedrooms" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="property-bathrooms">Bathrooms</label>
+                                <input type="number" id="property-bathrooms" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="property-description">Description</label>
+                            <textarea id="property-description" rows="4" required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="property-amenities" class="amenity-label">Amenities</label>
+                            <div class="checkbox-group">
+                                <label><input type="checkbox" name="amenities" value="wifi"> WiFi</label>
+                                <label><input type="checkbox" name="amenities" value="parking"> Parking</label>
+                                <label><input type="checkbox" name="amenities" value="laundry"> Laundry</label>
+                                <label><input type="checkbox" name="amenities" value="gym"> Gym</label>
+                                <label><input type="checkbox" name="amenities" value="pool"> Pool</label>
+                                <label><input type="checkbox" name="amenities" value="ac"> Air Conditioning</label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="property-images">Property Images (minimum 4 required)</label>
+                            <input type="file" id="property-images" name="images" accept="image/*" multiple required />
+                            <small style="color: var(--text-light); display: block; margin-top: 5px;">
+                                Please upload at least 4 high-quality images of your property
+                            </small>
+                        </div>
+
+                        <button type="submit" class="btn-secondary">Submit for Approval</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="site-footer">
+        <div class="footer-container">
+            <div class="footer-brand">
+                <h3>QuickRent</h3>
+                <p>Find verified homes for students and professionals with ease.</p>
+            </div>
+            <div class="footer-links">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="browse.html">Browse</a></li>
+                    <li><a href="#" onclick="showPage('signup')">Sign Up</a></li>
+                    <li><a href="#" onclick="showPage('login')">Login</a></li>
+                </ul>
+            </div>
+            <div class="footer-contact">
+                <h4>Contact</h4>
+                <ul>
+                    <li><i class="fas fa-envelope"></i> support@quickrent.com</li>
+                    <li><i class="fas fa-phone"></i> +91 98765 43210</li>
+                    <li><i class="fas fa-map-marker-alt"></i> Mumbai, India</li>
+                </ul>
+            </div>
+            <div class="footer-social">
+                <h4>Follow Us</h4>
+                <div class="social-icons">
+                    <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <span>© <span id="year">2025</span> QuickRent. All rights reserved.</span>
+        </div>
+    </footer>
+    <script src="script.js"></script>
+</body>
+
+</html>
